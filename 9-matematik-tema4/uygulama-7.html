@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7. Uygulama · 9. Sınıf Matematik</title>
+<meta name="description" content="Kitaptaki 2. madde: tablodaki üçgen çiftlerini matematik yazılımıyla çizin; karşılıklı açıları ve kenar uzunluklarını ölçerek gözlemleyin. Oranları ve sonuçları siz bulun.">
+<style>
+:root{--bg:#f7f5f2;--card:#fff;--ink:#1f2328;--muted:#5f6670;--line:#e3ded8;--accent:#e2551f;--accent-soft:#fdebe3;--c1:#d6336c;--c2:#1c7ed6;--c3:#2f9e44;--c4:#9c5b14;--grid:#eceae6;--axis:#3b3f45}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+header{background:var(--card);border-bottom:3px solid var(--accent);padding:12px 16px}
+header .ust{font-size:13px;color:var(--muted)}
+header h1{margin:2px 0 0;font-size:20px;line-height:1.25}
+header p{margin:4px 0 0;font-size:14px;color:var(--muted)}
+main{max-width:980px;margin:0 auto;padding:12px 16px 32px}
+.kart{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 14px}
+.kart h2{margin:0 0 4px;font-size:17px}
+.kart .not{margin:0 0 10px;font-size:14px;color:var(--muted)}
+.yerlesim{display:grid;gap:14px}
+@media (min-width:820px){.yerlesim{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start}}
+.tuval{position:relative;width:100%;aspect-ratio:4/3;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;touch-action:none}
+.tuval canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab}
+.araclar{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+button{font:inherit;font-size:14px;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:8px;padding:7px 11px;cursor:pointer;min-height:38px}
+button:hover{border-color:var(--accent)}
+button.ana{background:var(--accent);border-color:var(--accent);color:#fff}
+button.secili{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.surgu{display:grid;grid-template-columns:2.2em 1fr 4.6em;align-items:center;gap:8px;margin:6px 0}
+.surgu label{font-weight:700;font-style:italic;font-family:"Times New Roman",serif;font-size:19px;text-align:center}
+.surgu input[type=range]{width:100%;accent-color:var(--accent);height:30px}
+.surgu input[type=text]{width:100%;font:inherit;font-size:15px;padding:6px;border:1px solid var(--line);border-radius:8px;text-align:center}
+.surgu input.hata,.giris input.hata{border-color:#c92a2a;background:#fff5f5}
+.aralik{font-size:12px;color:var(--muted);margin:-2px 0 6px 3em}
+.formul{font-family:"Times New Roman",serif;font-size:19px;background:#faf8f6;border:1px dashed var(--line);border-radius:8px;padding:8px 10px;margin:4px 0 10px;overflow-x:auto;white-space:nowrap}
+.uyari{color:#c92a2a;font-size:14px;min-height:1.2em;margin:4px 0}
+.giris{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center;margin:6px 0}
+.giris span{font-family:"Times New Roman",serif;font-style:italic;font-size:18px;font-weight:700;white-space:nowrap}
+.giris input{width:100%;font:inherit;font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;border-left-width:6px}
+.ipucu{font-size:13px;color:var(--muted);margin:6px 0 0}
+.ipucu code{background:#f1efec;border-radius:4px;padding:1px 4px}
+.olcum{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:15px}
+.olcum dt{color:var(--muted)}
+.olcum dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}
+.olcum dd.vurgu{color:var(--accent);font-size:17px}
+.secenek{display:flex;align-items:center;gap:8px;font-size:14px;margin:8px 0 0}
+.secenek input{width:18px;height:18px;accent-color:var(--accent)}
+.veri-kap{max-height:420px;overflow:auto;border:1px solid var(--line);border-radius:10px}
+table.veri{border-collapse:collapse;width:100%;font-size:15px}
+table.veri th{position:sticky;top:0;background:#faf8f6;font-size:13px;font-weight:600;padding:6px;border-bottom:1px solid var(--line);text-align:center}
+table.veri td{padding:3px 4px;border-bottom:1px solid #f1efec}
+table.veri td.no{color:var(--muted);font-size:12px;text-align:center;width:2em}
+table.veri input{width:100%;min-width:4em;font:inherit;padding:6px;border:1px solid var(--line);border-radius:6px;text-align:center}
+table.veri button.sil{min-height:30px;padding:2px 9px;color:var(--muted)}
+footer{max-width:980px;margin:0 auto;padding:0 16px 24px;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <div class="ust">9. Sınıf Matematik · 4. Tema: Eşlik ve Benzerlik</div>
+  <h1>7. Uygulama: Üçgenlerin Benzer Olma Şartları</h1>
+  <p>Kitaptaki 2. madde: tablodaki üçgen çiftlerini matematik yazılımıyla çizin; karşılıklı açıları ve kenar uzunluklarını ölçerek gözlemleyin. Oranları ve sonuçları siz bulun.</p>
+</header>
+<main>
+<div class="yerlesim">
+  <section class="kart">
+    <h2>ABC ve DEF üçgenleri</h2>
+    <p class="not">Altı köşeyi de sürükleyerek tablodaki üçgenleri oluşturun. Yarım birimlik ızgaraya yapıştırma açıktır; kapatıp serbest de çizebilirsiniz.</p>
+    <div id="surguler"></div>
+    <div class="uyari" id="uyari"></div>
+    <div class="tuval" id="tuval"></div>
+    <div class="araclar" id="araclar"></div>
+    <label class="secenek" id="yapKap"><input type="checkbox" id="yapistir" checked> Noktaları ızgaraya yapıştır</label>
+  </section>
+  <section class="kart">
+    <h2>Göster ve ölç</h2>
+    <div id="secenekler"></div>
+    <dl class="olcum" id="olcum" style="margin-top:10px"></dl>
+    <p class="ipucu">Ölçümler, matematik yazılımındaki Uzaklık/Açı/Alan araçlarının verdiği değerlerdir; tabloyu bunlarla doldurup genellemenizi kendiniz yapın.</p>
+  </section>
+</div>
+</main>
+<footer>Ders kitabındaki 7. Uygulama (kitap s. 43–45) için hazırlanmış etkileşimli sayfadır; herhangi bir program kurmadan telefonda ya da bilgisayarda çalışır.</footer>
+<script>
+"use strict";
+/* ---------- İfade çözümleyici: "2sin(3x+1)-4", "cot x", "pi/2", "3,14" ---------- */
+const FONK = {
+  sin: Math.sin, cos: Math.cos, tan: Math.tan, cot: v => 1 / Math.tan(v), sec: v => 1 / Math.cos(v),
+  csc: v => 1 / Math.sin(v), cosec: v => 1 / Math.sin(v), arcsin: Math.asin, arccos: Math.acos,
+  arctan: Math.atan, asin: Math.asin, acos: Math.acos, atan: Math.atan, sqrt: Math.sqrt, kok: Math.sqrt,
+  abs: Math.abs, ln: Math.log, log: Math.log10, exp: Math.exp, tg: Math.tan, cotg: v => 1 / Math.tan(v)
+};
+const ADLAR = Object.keys(FONK).concat(["pi", "x", "t", "e"]).sort((a, b) => b.length - a.length);
+
+function mutlak(s) { // "|" açılış mı kapanış mı: öncesinde işlem/parantez/başlangıç varsa açılış
+  let o = "", acik = 0;
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (c !== "|") { o += c; continue; }
+    const once = o.replace(/\s+$/, "").slice(-1);
+    if (!acik || once === "" || "+-−*/^(|·×".includes(once) || /abs\($/.test(o)) { o += "abs("; acik++; }
+    else { o += ")"; acik--; }
+  }
+  if (acik) throw "Mutlak değer çizgisi kapanmamış";
+  return o;
+}
+
+function belirtec(s, kullanici = {}) { // kullanici: Giriş kutularındaki fonksiyonlar (bileşke için: h(f(x)))
+  const adlar = Object.keys(kullanici).length ? ADLAR.concat(Object.keys(kullanici)).sort((a, b) => b.length - a.length) : ADLAR;
+  // logaritma tabanı: log_2(x), log2(x), log_(1/3)(x) -> (1/ln(taban))*ln(x)
+  s = s.replace(/log_?\(([^()]+)\)\s*(?=\()/gi, "(1/ln($1))*ln").replace(/log_?(\d+(?:[.,]\d+)?)\s*(?=\()/gi, "(1/ln($1))*ln");
+  s = mutlak(s);  // |ax + b| -> abs(ax + b) (9. sınıf mutlak değer fonksiyonları)
+  s = s.toLowerCase().replace(/π/g, "pi").replace(/[−–]/g, "-").replace(/[·×⋅]/g, "*").replace(/÷/g, "/")
+       .replace(/²/g, "^2").replace(/³/g, "^3").replace(/√/g, "sqrt");
+  const t = [];
+  let i = 0;
+  while (i < s.length) {
+    const c = s[i];
+    if (/\s/.test(c)) { i++; continue; }
+    if (/[0-9.,]/.test(c)) {
+      let j = i;
+      while (j < s.length && /[0-9.,]/.test(s[j])) j++;
+      const v = parseFloat(s.slice(i, j).replace(",", "."));
+      if (isNaN(v)) throw "Sayı okunamadı";
+      t.push({ t: "n", v }); i = j; continue;
+    }
+    if (/[a-zçğıöşü]/.test(c)) {
+      let j = i;
+      while (j < s.length && /[a-zçğıöşü]/.test(s[j])) j++;
+      let kel = s.slice(i, j);
+      while (kel.length) {
+        const ad = adlar.find(a => kel.startsWith(a));
+        if (!ad) throw `"${kel}" tanınmadı`;
+        if (ad in kullanici) t.push({ t: "u", v: ad });
+        else if (ad in FONK) t.push({ t: "f", v: ad });
+        else if (ad === "pi") t.push({ t: "n", v: Math.PI });
+        else if (ad === "e") t.push({ t: "n", v: Math.E });
+        else t.push({ t: "x" });
+        kel = kel.slice(ad.length);
+      }
+      i = j; continue;
+    }
+    if ("+-*/^()".includes(c)) { t.push({ t: c }); i++; continue; }
+    throw `"${c}" karakteri kullanılamaz`;
+  }
+  return t;
+}
+
+function derle(kaynak, kullanici = {}) {
+  const t = belirtec(kaynak, kullanici);
+  if (!t.length) throw "Boş ifade";
+  let p = 0;
+  const bak = () => t[p], al = () => t[p++];
+  const baslarMi = k => k && (k.t === "n" || k.t === "x" || k.t === "f" || k.t === "u" || k.t === "(");
+  function toplam() {
+    let a = carpim();
+    while (bak() && (bak().t === "+" || bak().t === "-")) {
+      const o = al().t, b = carpim(), A = a;
+      a = o === "+" ? x => A(x) + b(x) : x => A(x) - b(x);
+    }
+    return a;
+  }
+  function carpim() {
+    let a = isaretli();
+    for (;;) {
+      const k = bak();
+      if (k && (k.t === "*" || k.t === "/")) {
+        al(); const b = isaretli(), A = a;
+        a = k.t === "*" ? x => A(x) * b(x) : x => A(x) / b(x);
+      } else if (baslarMi(k)) { // örtük çarpma: 2x, 3sin(x), (x+1)(x-1)
+        const b = us(), A = a; a = x => A(x) * b(x);
+      } else return a;
+    }
+  }
+  function isaretli() {
+    if (bak() && bak().t === "-") { al(); const a = isaretli(); return x => -a(x); }
+    if (bak() && bak().t === "+") { al(); return isaretli(); }
+    return us();
+  }
+  function us() {
+    const a = birincil();
+    if (bak() && bak().t === "^") { al(); const b = isaretli(); return x => Math.pow(a(x), b(x)); }
+    return a;
+  }
+  function birincil() {
+    const k = al();
+    if (!k) throw "İfade eksik";
+    if (k.t === "n") { const v = k.v; return () => v; }
+    if (k.t === "x") return x => x;
+    if (k.t === "(") {
+      const a = toplam();
+      if (!bak() || al().t !== ")") throw "Parantez kapanmamış";
+      return a;
+    }
+    if (k.t === "u") { // başka bir Giriş kutusundaki fonksiyon: f(x), h(f(x)) ... ya da sürgü değeri (a, b, c)
+      const u = kullanici[k.v];
+      if (typeof u === "object") return () => u.deger();
+      if (!bak() || bak().t !== "(") throw `${k.v} fonksiyonundan sonra parantez açın: ${k.v}(x)`;
+      const a = birincil(), ad = k.v;
+      return x => kullanici[ad](a(x));
+    }
+    if (k.t === "f") {
+      const f = FONK[k.v];
+      let us2 = null;
+      if (bak() && bak().t === "^") { al(); us2 = birincil(); } // sin^2(x)
+      let a;
+      if (bak() && bak().t === "(") a = birincil();
+      else { // parantezsiz: "sin 2x" = sin(2x), "cot x" = cot(x)
+        a = us();
+        while (bak() && (bak().t === "n" || bak().t === "x")) { const b = us(), A = a; a = x => A(x) * b(x); }
+      }
+      return us2 ? x => Math.pow(f(a(x)), us2(x)) : x => f(a(x));
+    }
+    throw "Beklenmeyen işaret";
+  }
+  const f = toplam();
+  if (p < t.length) throw "Fazladan işaret var";
+  return f;
+}
+
+function sayiOku(s) { // "1/3", "-pi/2", "0,5"
+  const f = derle(s), v = f(0);
+  if (!isFinite(v)) throw "Geçersiz sayı";
+  return v;
+}
+
+/* ---------- Biçimlendirme ---------- */
+function bicim(v, b = 2) {
+  if (!isFinite(v)) return "tanımsız";
+  const r = Math.abs(v) < 1e-10 ? 0 : v;
+  return r.toFixed(b).replace(/\.?0+$/, "").replace(".", ",").replace(/^-/, "−");
+}
+function piBicim(v) { // v/π küçük bir kesirse "3π/4" gibi yaz
+  const q = v / Math.PI;
+  for (const d of [1, 2, 3, 4, 6, 12]) {
+    const n = Math.round(q * d);
+    if (Math.abs(q * d - n) < 1e-9) {
+      if (n === 0) return "0";
+      const s = n < 0 ? "−" : "", a = Math.abs(n);
+      return s + (a === 1 ? "" : a) + "π" + (d === 1 ? "" : "/" + d);
+    }
+  }
+  return null;
+}
+
+/* ---------- Koordinat düzlemi ---------- */
+class Grafik {
+  constructor(kap, ayar = {}) {
+    this.kap = kap;
+    this.c = document.createElement("canvas");
+    kap.appendChild(this.c);
+    this.ctx = this.c.getContext("2d");
+    this.ilk = { xmin: -7, xmax: 7, ymin: -5, ymax: 5, ...ayar.gorunum };
+    Object.assign(this, this.ilk);
+    this.piEksen = ayar.piEksen ?? true;
+    this.esitOlcek = ayar.esitOlcek ?? false;
+    this.ciz = () => {};          // kullanıcı çizimi
+    this.surukle = ayar.surukle;  // nokta sürükleme kancası (isteğe bağlı)
+    this._isaretciler = new Map();
+    new ResizeObserver(() => this.boyutla()).observe(kap);
+    this._olaylar();
+    this.boyutla();
+  }
+  boyutla() {
+    const r = this.kap.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    this.w = r.width; this.h = r.height;
+    this.c.width = Math.round(r.width * d); this.c.height = Math.round(r.height * d);
+    this.ctx.setTransform(d, 0, 0, d, 0, 0);
+    if (this.esitOlcek) this._esitle();
+    this.yenile();
+  }
+  _esitle() { // x ve y birimleri aynı uzunlukta olsun
+    const cx = (this.xmin + this.xmax) / 2, cy = (this.ymin + this.ymax) / 2;
+    const ox = (this.xmax - this.xmin) / this.w, oy = (this.ymax - this.ymin) / this.h, o = Math.max(ox, oy);
+    this.xmin = cx - o * this.w / 2; this.xmax = cx + o * this.w / 2;
+    this.ymin = cy - o * this.h / 2; this.ymax = cy + o * this.h / 2;
+  }
+  X(x) { return (x - this.xmin) / (this.xmax - this.xmin) * this.w; }
+  Y(y) { return (this.ymax - y) / (this.ymax - this.ymin) * this.h; }
+  gx(px) { return this.xmin + px / this.w * (this.xmax - this.xmin); }
+  gy(py) { return this.ymax - py / this.h * (this.ymax - this.ymin); }
+  sifirla() { Object.assign(this, this.ilk); if (this.esitOlcek) this._esitle(); this.yenile(); }
+  yakinlas(k, px = this.w / 2, py = this.h / 2) {
+    const x = this.gx(px), y = this.gy(py);
+    this.xmin = x + (this.xmin - x) * k; this.xmax = x + (this.xmax - x) * k;
+    this.ymin = y + (this.ymin - y) * k; this.ymax = y + (this.ymax - y) * k;
+    this.yenile();
+  }
+  yenile() {
+    if (this._bekle) return;
+    this._bekle = true;
+    requestAnimationFrame(() => { this._bekle = false; this._ciz(); });
+  }
+  _adim(aralik, px) { // okunaklı bir ızgara adımı
+    const ham = aralik / Math.max(2, px / 70), us = Math.pow(10, Math.floor(Math.log10(ham)));
+    for (const m of [1, 2, 5, 10]) if (m * us >= ham) return m * us;
+  }
+  _ciz() {
+    const g = this.ctx, w = this.w, h = this.h;
+    g.clearRect(0, 0, w, h); g.fillStyle = "#fff"; g.fillRect(0, 0, w, h);
+    let xa, xEt;
+    if (this.piEksen) {
+      const adaylar = [Math.PI / 6, Math.PI / 4, Math.PI / 2, Math.PI, 2 * Math.PI, 4 * Math.PI, 8 * Math.PI];
+      xa = adaylar.find(a => (this.X(a) - this.X(0)) >= 46) || adaylar.at(-1);
+      xEt = v => piBicim(v) ?? bicim(v);
+    } else { xa = this._adim(this.xmax - this.xmin, w); xEt = v => bicim(v, 4); }
+    const ya = this._adim(this.ymax - this.ymin, h);
+    g.lineWidth = 1; g.strokeStyle = getComputedStyle(document.body).getPropertyValue("--grid") || "#eee";
+    g.beginPath();
+    for (let v = Math.ceil(this.xmin / xa) * xa; v <= this.xmax; v += xa) { const p = Math.round(this.X(v)) + .5; g.moveTo(p, 0); g.lineTo(p, h); }
+    for (let v = Math.ceil(this.ymin / ya) * ya; v <= this.ymax; v += ya) { const p = Math.round(this.Y(v)) + .5; g.moveTo(0, p); g.lineTo(w, p); }
+    g.stroke();
+    const ox = Math.min(Math.max(this.X(0), 0), w), oy = Math.min(Math.max(this.Y(0), 0), h);
+    g.strokeStyle = "#3b3f45"; g.lineWidth = 1.3; g.beginPath();
+    g.moveTo(0, oy); g.lineTo(w, oy); g.moveTo(ox, 0); g.lineTo(ox, h); g.stroke();
+    g.fillStyle = "#3b3f45"; g.font = "12px system-ui,Arial"; g.textAlign = "center"; g.textBaseline = "top";
+    for (let v = Math.ceil(this.xmin / xa) * xa; v <= this.xmax; v += xa) {
+      if (Math.abs(v) < xa / 2) continue;
+      const p = this.X(v); g.fillRect(p - .5, oy - 3, 1, 6);
+      g.fillText(xEt(v), p, Math.min(oy + 5, h - 15));
+    }
+    g.textAlign = "right"; g.textBaseline = "middle";
+    for (let v = Math.ceil(this.ymin / ya) * ya; v <= this.ymax; v += ya) {
+      if (Math.abs(v) < ya / 2) continue;
+      const p = this.Y(v); g.fillRect(ox - 3, p - .5, 6, 1);
+      g.fillText(bicim(v, 4), Math.max(ox - 5, 26), p);
+    }
+    g.textAlign = "left"; g.textBaseline = "top"; g.font = "italic 14px 'Times New Roman',serif";
+    g.fillText("x", w - 12, Math.min(oy + 4, h - 18)); g.fillText("y", Math.min(ox + 5, w - 12), 3);
+    g.font = "12px system-ui,Arial"; g.textAlign = "right"; g.fillText("O", ox - 4, oy + 3);
+    this.ciz(g);
+  }
+  fonksiyon(f, renk, ayar = {}) { // süreksizliklerde (tan, cot) çizgiyi kopar
+    const g = this.ctx, n = Math.ceil(this.w * 2), yAr = this.ymax - this.ymin;
+    g.strokeStyle = renk; g.lineWidth = ayar.kalinlik ?? 2.4; g.setLineDash(ayar.kesik ? [6, 5] : []);
+    g.beginPath();
+    let onceki = null;
+    for (let i = 0; i <= n; i++) {
+      const x = this.xmin + (this.xmax - this.xmin) * i / n;
+      let y; try { y = f(x); } catch { y = NaN; }
+      if (!isFinite(y) || Math.abs(y) > 1e6) { onceki = null; continue; }
+      if (onceki !== null) {
+        const sicrama = Math.abs(y - onceki) > yAr * 1.5;
+        const ters = (onceki > this.ymax && y < this.ymin) || (onceki < this.ymin && y > this.ymax);
+        if (sicrama || ters) { onceki = null; }
+      }
+      const py = Math.max(-1e4, Math.min(1e4, this.Y(y)));
+      if (onceki === null) g.moveTo(this.X(x), py); else g.lineTo(this.X(x), py);
+      onceki = y;
+    }
+    g.stroke(); g.setLineDash([]);
+  }
+  nokta(x, y, renk, etiket) {
+    const g = this.ctx;
+    g.fillStyle = renk; g.beginPath(); g.arc(this.X(x), this.Y(y), 5, 0, 7); g.fill();
+    if (etiket) { g.font = "13px system-ui,Arial"; g.textAlign = "left"; g.textBaseline = "bottom"; g.fillStyle = "#1f2328"; g.fillText(etiket, this.X(x) + 7, this.Y(y) - 4); }
+  }
+  _olaylar() {
+    const c = this.c, ip = new Map();
+    let sur = null;
+    const konum = e => { const r = c.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    c.addEventListener("pointerdown", e => {
+      c.setPointerCapture(e.pointerId);
+      const [px, py] = konum(e);
+      ip.set(e.pointerId, [px, py]);
+      if (ip.size === 1 && this.surukle && this.surukle.basla(this.gx(px), this.gy(py), px, py)) sur = "nokta";
+      else if (sur !== "nokta") sur = "kaydir";
+    });
+    c.addEventListener("pointermove", e => {
+      if (!ip.has(e.pointerId)) return;
+      const [px, py] = konum(e), [ox, oy] = ip.get(e.pointerId);
+      if (sur === "nokta") { this.surukle.tasi(this.gx(px), this.gy(py)); ip.set(e.pointerId, [px, py]); return; }
+      if (ip.size === 2) { // iki parmakla yakınlaştırma
+        const [a, b] = [...ip.values()], d0 = Math.hypot(a[0] - b[0], a[1] - b[1]);
+        ip.set(e.pointerId, [px, py]);
+        const [a2, b2] = [...ip.values()], d1 = Math.hypot(a2[0] - b2[0], a2[1] - b2[1]);
+        if (d0 > 0 && d1 > 0) this.yakinlas(d0 / d1, (a2[0] + b2[0]) / 2, (a2[1] + b2[1]) / 2);
+        return;
+      }
+      const dx = (px - ox) / this.w * (this.xmax - this.xmin), dy = (py - oy) / this.h * (this.ymax - this.ymin);
+      this.xmin -= dx; this.xmax -= dx; this.ymin += dy; this.ymax += dy;
+      ip.set(e.pointerId, [px, py]); this.yenile();
+    });
+    const bitir = e => { ip.delete(e.pointerId); if (!ip.size) sur = null; };
+    c.addEventListener("pointerup", bitir); c.addEventListener("pointercancel", bitir);
+    c.addEventListener("wheel", e => { e.preventDefault(); const [px, py] = konum(e); this.yakinlas(e.deltaY > 0 ? 1.15 : 1 / 1.15, px, py); }, { passive: false });
+  }
+  araclar(kap, piDugme = true) {
+    const ekle = (yazi, baslik, is) => { const b = document.createElement("button"); b.textContent = yazi; b.title = baslik; b.onclick = is; kap.appendChild(b); return b; };
+    ekle("＋", "Yakınlaştır", () => this.yakinlas(1 / 1.4));
+    ekle("−", "Uzaklaştır", () => this.yakinlas(1.4));
+    ekle("Görünümü sıfırla", "İlk görünüme dön", () => this.sifirla());
+    if (!piDugme) return;
+    const pb = ekle(this.piEksen ? "x ekseni: π" : "x ekseni: sayı", "x ekseni etiketlerini değiştir", () => {
+      this.piEksen = !this.piEksen; pb.textContent = this.piEksen ? "x ekseni: π" : "x ekseni: sayı"; this.yenile();
+    });
+  }
+}
+
+/* ---------- Sürgü: aralık + yazılabilir değer kutusu (1/3, -pi/2 ...) ---------- */
+function surgu(kap, ad, ayar, degisti) {
+  const { min = -5, max = 5, adim = 0.1, deger = 0 } = ayar;
+  const sat = document.createElement("div"); sat.className = "surgu";
+  sat.innerHTML = `<label for="s-${ad}">${ad}</label><input id="s-${ad}" type="range" min="${min}" max="${max}" step="${adim}" value="${deger}" aria-label="${ad} sürgüsü"><input type="text" inputmode="decimal" value="${bicim(deger)}" aria-label="${ad} değeri">`;
+  kap.appendChild(sat);
+  const ar = document.createElement("div"); ar.className = "aralik"; ar.textContent = `${bicim(min)} ile ${bicim(max)} arası`;
+  kap.appendChild(ar);
+  const [r, k] = sat.querySelectorAll("input");
+  const s = { deger, ayarla(v, kaynak) {
+    v = Math.min(max, Math.max(min, v)); s.deger = v;
+    if (kaynak !== r) r.value = v;
+    if (kaynak !== k) k.value = bicim(v, 3);
+    degisti(v);
+  } };
+  r.addEventListener("input", () => s.ayarla(+r.value, r));
+  k.addEventListener("change", () => {
+    try { const v = sayiOku(k.value); k.classList.remove("hata"); s.ayarla(v, v < min || v > max ? null : k); }
+    catch { k.classList.add("hata"); }
+  });
+  return s;
+}
+
+/* ---------- GeoGebra "Giriş" benzeri fonksiyon kutuları ---------- */
+function girisler(kap, adlar, renkler, degisti, ornek = "örnek: 2sin(x) + 1", sabitler = {}) {
+  let derinlik = 0; // f(g(x)) ve g(f(x)) birbirini çağırırsa sonsuz döngüye girmesin
+  const liste = adlar.map((ad, i) => {
+    const sat = document.createElement("div"); sat.className = "giris";
+    sat.innerHTML = `<span style="color:${renkler[i]}">${ad}(x) =</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${i ? "" : ornek}" style="border-left-color:${renkler[i]}" aria-label="${ad}(x) fonksiyonu">`;
+    kap.appendChild(sat);
+    const inp = sat.querySelector("input"), o = { ad, renk: renkler[i], f: null, inp };
+    o.oku = () => {
+      if (!inp.value.trim()) { o.f = null; inp.classList.remove("hata"); inp.title = ""; return; }
+      // diğer kutulardaki fonksiyonlar adlarıyla kullanılabilir (bileşke); kendi adı kullanılamaz
+      const env = {};
+      Object.entries(sabitler).forEach(([ad, al]) => env[ad] = { deger: al });
+      liste.forEach(b => {
+        if (b !== o) env[b.ad] = v => {
+          if (!b.f || derinlik > 20) return NaN;
+          derinlik++; try { return b.f(v); } finally { derinlik--; }
+        };
+      });
+      try { o.f = derle(inp.value, env); inp.classList.remove("hata"); inp.title = ""; }
+      catch (h) { o.f = null; inp.classList.add("hata"); inp.title = String(h); }
+    };
+    inp.addEventListener("input", () => { liste.forEach(b => b.oku()); degisti(); });
+    return o;
+  });
+  const ip = document.createElement("p"); ip.className = "ipucu";
+  ip.innerHTML = "Yazım: <code>sin(x)</code>, <code>cos(2x)</code>, <code>tan(x)</code>, <code>cot(x)</code>, <code>pi</code> (π), çarpma <code>*</code> ya da bitişik (<code>3sin(x)</code>), üs <code>^</code>, kesir <code>1/2</code>. Fonksiyon yazdıkça çizilir.";
+  kap.appendChild(ip);
+  return liste;
+}
+
+function kesisimler(f, g, a, b, n = 2000) { // f = g çözümleri (görünen aralıkta, sayısal)
+  const h = x => f(x) - g(x), k = [];
+  let x0 = a, h0 = h(a);
+  for (let i = 1; i <= n; i++) {
+    const x1 = a + (b - a) * i / n, h1 = h(x1);
+    if (isFinite(h0) && isFinite(h1) && (h0 === 0 || h0 * h1 < 0)) {
+      let l = x0, r = x1, hl = h0;
+      for (let j = 0; j < 60; j++) { const m = (l + r) / 2, hm = h(m); if (hl * hm <= 0) r = m; else { l = m; hl = hm; } }
+      const x = (l + r) / 2, y = f(x);
+      if (Math.abs(h(x)) < 1e-6 && isFinite(y) && !k.some(p => Math.abs(p[0] - x) < (b - a) / n)) k.push([x, y]);
+    }
+    x0 = x1; h0 = h1;
+  }
+  return k;
+}
+
+/* ---------- Fonksiyon katsayısını okunur yaz: 1·sin → sin, −1·sin → −sin ---------- */
+function sayiYaz(v) { // 0,333… yerine 1/3
+  for (let d = 2; d <= 12; d++) {
+    const n = Math.round(v * d);
+    if (Math.abs(v * d - n) < 1e-9 && n % d) return (n < 0 ? "−" : "") + Math.abs(n) + "/" + d;
+  }
+  return bicim(v, 3);
+}
+function kts(v, bir = true) { // çarpan
+  if (bir && Math.abs(v - 1) < 1e-12) return "";
+  if (bir && Math.abs(v + 1) < 1e-12) return "−";
+  return sayiYaz(v) + "·";
+}
+function ekle(v) { // toplanan
+  if (Math.abs(v) < 1e-12) return "";
+  return (v < 0 ? " − " : " + ") + sayiYaz(Math.abs(v));
+}
+</script>
+<script>
+/* Üçgen geometrisi sayfası (10. sınıf Tema 1). Ayar alanları web_derle.py başındaki açıklamada. */
+const AYAR = {"baslangic": {"A": [0, 0], "B": [4, 0], "C": [1, 3], "D": [6, 0], "E": [13, 0], "F": [9, 5]}, "izgara": 0.5, "gorunum": {"xmin": -1, "xmax": 16, "ymin": -2, "ymax": 9}, "adimlar": [], "katmanlar": [{"yazi": "DEF üçgeni", "dolgular": [["D", "E", "F"]], "noktalar": ["D", "E", "F"]}, {"yazi": "Kenar uzunlukları", "olcumler": ["|AB|", "|BC|", "|AC|", "|DE|", "|EF|", "|DF|"]}, {"yazi": "Açı ölçüleri", "olcumler": ["m(BAC)", "m(ABC)", "m(ACB)", "m(EDF)", "m(DEF)", "m(DFE)"]}]};
+const MOD = AYAR.mod || "serbest";
+const P = JSON.parse(JSON.stringify(AYAR.baslangic || { A: [1, 4], B: [0, 0], C: [6, 0] }));
+const ILK = JSON.parse(JSON.stringify(P));
+const SURUK = AYAR.suruklenen || Object.keys(P);           // sürüklenebilen noktalar
+const YATAY = AYAR.yatay || [];                             // yalnızca yatay hareket eden noktalar (x eksenine paralel taban)
+const ADIM = AYAR.izgara ?? 1;
+const S = {};                                               // sürgü değerleri
+const sec = {};
+
+/* ---------- geometri ---------- */
+const fark = (p, q) => [p[0] - q[0], p[1] - q[1]], topla = (p, q) => [p[0] + q[0], p[1] + q[1]], kat = (p, k) => [p[0] * k, p[1] * k];
+const uz = v => Math.hypot(v[0], v[1]), bir = v => { const l = uz(v) || 1; return [v[0] / l, v[1] / l]; };
+const mesafe = (p, q) => uz(fark(p, q)), orta = (p, q) => [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2];
+function aci(X, Y, Z) {
+  const u = fark(X, Y), v = fark(Z, Y), c = (u[0] * v[0] + u[1] * v[1]) / (uz(u) * uz(v));
+  return Math.acos(Math.max(-1, Math.min(1, c))) * 180 / Math.PI;
+}
+function kesis(p, d, q, e) {
+  const k = d[0] * e[1] - d[1] * e[0];
+  if (Math.abs(k) < 1e-10) return null;
+  const t = ((q[0] - p[0]) * e[1] - (q[1] - p[1]) * e[0]) / k;
+  return [p[0] + t * d[0], p[1] + t * d[1]];
+}
+function izdus(X, p, q) { const d = bir(fark(q, p)), v = fark(X, p), t = v[0] * d[0] + v[1] * d[1]; return topla(p, kat(d, t)); }
+function alan(ks) { let s = 0; ks.forEach((p, i) => { const q = ks[(i + 1) % ks.length]; s += p[0] * q[1] - q[0] * p[1]; }); return Math.abs(s) / 2; }
+function ucgenAl(N, u) { return (u || ["A", "B", "C"]).map(k => N[k]); }
+function icMerkez(a, b, c) { const la = mesafe(b, c), lb = mesafe(a, c), lc = mesafe(a, b), t = la + lb + lc; return [(la * a[0] + lb * b[0] + lc * c[0]) / t, (la * a[1] + lb * b[1] + lc * c[1]) / t]; }
+function disMerkez(a, b, c) { const la = mesafe(b, c), lb = mesafe(a, c), lc = mesafe(a, b), t = -la + lb + lc; return [(-la * a[0] + lb * b[0] + lc * c[0]) / t, (-la * a[1] + lb * b[1] + lc * c[1]) / t]; }
+function cevrel(a, b, c) { const m1 = orta(a, b), m2 = orta(b, c), d1 = fark(b, a), d2 = fark(c, b); return kesis(m1, [-d1[1], d1[0]], m2, [-d2[1], d2[0]]); }
+function diklik(a, b, c) { const d1 = fark(c, b), d2 = fark(c, a); return kesis(a, [-d1[1], d1[0]], b, [-d2[1], d2[0]]); }
+function aciortayYon(X, Y, Z, dis) { const u = bir(fark(Y, X)), v = bir(fark(Z, X)); return dis ? fark(u, v) : topla(u, v); }
+
+/* ---------- noktalar ---------- */
+function kenardanUcgen() { // AB, BC, AC sürgülerinden: B(0,0), C(BC,0), A üstte
+  const c = S.AB, a = S.BC, b = S.AC;
+  if (!(a < b + c && b < a + c && c < a + b)) return false;
+  const x = (c * c - b * b + a * a) / (2 * a), y = Math.sqrt(Math.max(0, c * c - x * x));
+  P.B = [0, 0]; P.C = [a, 0]; P.A = [x, y]; return true;
+}
+function noktalar() {
+  for (const [k, [sx, sy]] of Object.entries(AYAR.bagli || {})) { // sürgüye bağlı koordinat (kitapta "B'nin apsisini n'ye atayınız")
+    if (sx) P[k] = [S[sx], P[k][1]]; if (sy) P[k] = [P[k][0], S[sy]];
+  }
+  const N = {}; for (const k in P) N[k] = P[k];
+  for (const a of AYAR.adimlar || []) {
+    const g = k => N[k];
+    let p = null;
+    const [X, Y, Z] = a.kose ? [a.kose, ...(a.kollar || ["A", "B", "C"].filter(k => k !== a.kose))] : [];
+    switch (a.tur) {
+      case "orta": p = orta(g(a.uc[0]), g(a.uc[1])); break;
+      case "aciortay_ayak": p = kesis(g(X), aciortayYon(g(X), g(Y), g(Z)), g(Y), fark(g(Z), g(Y))); break;
+      case "dis_aciortay_ayak": p = kesis(g(X), aciortayYon(g(X), g(Y), g(Z), true), g(Y), fark(g(Z), g(Y))); break;
+      case "aciortay_nokta": p = topla(g(X), kat(bir(aciortayYon(g(X), g(Y), g(Z))), S[a.surgu] ?? a.uzaklik ?? 3)); break;
+      case "dik_ayak": p = izdus(g(a.nokta), g(a.dogru[0]), g(a.dogru[1])); break;
+      case "ic_merkez": p = icMerkez(...ucgenAl(N, a.ucgen)); break;
+      case "dis_merkez": { const u = a.ucgen || ["A", "B", "C"], i = u.indexOf(a.kose), s = [u[i], u[(i + 1) % 3], u[(i + 2) % 3]].map(g); p = disMerkez(...s); break; }
+      case "agirlik": { const [q, r, s] = ucgenAl(N, a.ucgen); p = [(q[0] + r[0] + s[0]) / 3, (q[1] + r[1] + s[1]) / 3]; break; }
+      case "cevrel_merkez": p = cevrel(...ucgenAl(N, a.ucgen)); break;
+      case "diklik_merkezi": p = diklik(...ucgenAl(N, a.ucgen)); break;
+      case "kesisim": p = kesis(g(a.d1[0]), fark(g(a.d1[1]), g(a.d1[0])), g(a.d2[0]), fark(g(a.d2[1]), g(a.d2[0]))); break;
+      case "yansima": { const a1 = g(a.dogru[0]), a2 = g(a.dogru[1]), X = g(a.nokta); if (mesafe(a1, a2) < 1e-9) break; const h = izdus(X, a1, a2); p = fark(kat(h, 2), X); break; } // 9. sınıf: doğruda yansıt
+      case "dondur": { // 9. sınıf: nokta etrafında döndür (yon: -1 saat yönü), açı sürgüden derece
+        const m = g(a.merkez), X = g(a.nokta), t = (a.yon ?? 1) * (S[a.surgu] ?? a.aci ?? 0) * Math.PI / 180, v = fark(X, m);
+        p = [m[0] + v[0] * Math.cos(t) - v[1] * Math.sin(t), m[1] + v[0] * Math.sin(t) + v[1] * Math.cos(t)]; break; }
+      case "bolen": { const k = S[a.surgu] ?? a.k ?? 1, p1 = g(a.uc[0]), p2 = g(a.uc[1]); p = topla(p1, kat(fark(p2, p1), k / (1 + k))); break; } // |P1 X| / |X P2| = k
+      case "benzer": { // hedef = merkez + k·(kaynak − merkez) + kaydırma
+        const k = S[a.surgu] ?? a.k ?? 1, m = g(a.merkez); p = topla(topla(m, kat(fark(g(a.kaynak), m), k)), a.kaydir || [0, 0]); break;
+      }
+    }
+    if (p && isFinite(p[0]) && isFinite(p[1])) N[a.ad] = p;
+  }
+  return N;
+}
+
+/* ---------- arayüz ---------- */
+const gr = new Grafik(document.getElementById("tuval"), { piEksen: false, esitOlcek: true, gorunum: AYAR.gorunum || { xmin: -2, xmax: 10, ymin: -2, ymax: 7 } });
+gr.araclar(document.getElementById("araclar"), false);
+if (MOD !== "kenar") {
+  const b = document.createElement("button"); b.textContent = "Noktaları ilk yerine al";
+  b.onclick = () => { Object.assign(P, JSON.parse(JSON.stringify(ILK))); ciz(); }; document.getElementById("araclar").appendChild(b);
+} else document.getElementById("yapKap").style.display = "none";
+function sigdir() { // kenar sürgülü modda üçgen her zaman görünsün
+  if (MOD !== "kenar" || !kenardanUcgen()) return;
+  const N = noktalar(), ps = Object.values(N).filter(p => p && isFinite(p[0]) && Math.abs(p[0]) < 200 && Math.abs(p[1]) < 200);
+  const xs = ps.map(p => p[0]), ys = ps.map(p => p[1]), px = (Math.max(...xs) - Math.min(...xs)) * 0.15 + 1, py = (Math.max(...ys) - Math.min(...ys)) * 0.15 + 1;
+  gr.ilk = { xmin: Math.min(...xs) - px, xmax: Math.max(...xs) + px, ymin: Math.min(...ys) - py, ymax: Math.max(...ys) + py }; gr.sifirla();
+}
+for (const s of AYAR.surguler || []) {
+  S[s.ad] = s.deger;
+  surgu(document.getElementById("surguler"), s.ad, s, v => { S[s.ad] = v; sigdir(); ciz(); });
+}
+const secenek = (id, yazi, acik) => {
+  const l = document.createElement("label"); l.className = "secenek";
+  l.innerHTML = `<input type="checkbox" id="${id}" ${acik ? "checked" : ""}> ${yazi}`;
+  document.getElementById("secenekler").appendChild(l);
+  l.querySelector("input").addEventListener("change", e => { sec[id] = e.target.checked; ciz(); });
+  sec[id] = !!acik;
+};
+(AYAR.katmanlar || []).forEach((k, i) => secenek("k" + i, k.yazi, k.acik !== false));
+if (!AYAR.ucgen_secenek_yok) {
+  secenek("kenar", "Kenar uzunluklarını şekilde göster", !!AYAR.kenar_goster);
+  secenek("aci", "İç açı ölçülerini şekilde göster", !!AYAR.aci_goster);
+}
+if ((AYAR.katmanlar || []).some(k => k.iz)) { const b = document.createElement("button"); b.textContent = "İzi temizle"; b.onclick = () => { IZ.length = 0; ciz(); }; document.getElementById("araclar").appendChild(b); }
+
+/* ---------- ölçüm ifadeleri: |AB|, m(ABC), A(ABC) ve + − · / ---------- */
+function deger(ifade, N) {
+  let hata = false;
+  const NK = "[A-Z](?:\\d|'{1,2})?";  // nokta adı: A, A1, A', A''
+  const js = ifade.replace(new RegExp(`Ç\\(((?:${NK})+)\\)`, "g"), (_, ks) => { const u = ks.match(new RegExp(NK, "g")); return u.every(k => N[k]) ? `(${u.reduce((s, k, i) => s + mesafe(N[k], N[u[(i + 1) % u.length]]), 0)})` : (hata = true, "0"); })
+    .replace(new RegExp(`\\|(${NK})(${NK})\\|`, "g"), (_, p, q) => N[p] && N[q] ? `(${mesafe(N[p], N[q])})` : (hata = true, "0"))
+    .replace(new RegExp(`m\\((${NK})(${NK})(${NK})\\)`, "g"), (_, p, q, r) => N[p] && N[q] && N[r] ? `(${aci(N[p], N[q], N[r])})` : (hata = true, "0"))
+    .replace(/x\(([A-Z])\)/g, (_, p) => N[p] ? `(${N[p][0]})` : (hata = true, "0"))
+    .replace(/y\(([A-Z])\)/g, (_, p) => N[p] ? `(${N[p][1]})` : (hata = true, "0"))
+    .replace(/eğim\(([A-Z])([A-Z])\)/g, (_, p, q) => N[p] && N[q] && Math.abs(N[q][0] - N[p][0]) > 1e-9 ? `(${(N[q][1] - N[p][1]) / (N[q][0] - N[p][0])})` : (hata = true, "0"))
+    .replace(/eğimaçısı\(([A-Z])([A-Z])\)/g, (_, p, q) => { if (!N[p] || !N[q]) { hata = true; return "0"; } let a = Math.atan2(N[q][1] - N[p][1], N[q][0] - N[p][0]) * 180 / Math.PI; a = ((a % 180) + 180) % 180; return `(${a})`; })
+    .replace(new RegExp(`A\\(((?:${NK})+)\\)`, "g"), (_, ks) => { const u = ks.match(new RegExp(NK, "g")); return u.every(k => N[k]) ? `(${alan(u.map(k => N[k]))})` : (hata = true, "0"); })
+    .replace(/·/g, "*").replace(/−/g, "-");
+  if (hata || /[^0-9.eE+\-*/() ]/.test(js)) return null;
+  try { const v = Function(`return (${js})`)(); return isFinite(v) ? v : null; } catch { return null; }
+}
+
+/* ---------- çizim ---------- */
+function cizgi(g, p, q, renk, kesik, kal = 1.6) {
+  g.strokeStyle = renk; g.lineWidth = kal; g.setLineDash(kesik ? [6, 5] : []);
+  g.beginPath(); g.moveTo(gr.X(p[0]), gr.Y(p[1])); g.lineTo(gr.X(q[0]), gr.Y(q[1])); g.stroke(); g.setLineDash([]);
+}
+function uzat(p, q, bas, son) { const d = bir(fark(q, p)); return [topla(p, kat(d, bas)), topla(p, kat(d, son))]; }
+function yay(g, Y, X, Z, renk, yazi) {
+  const r = 20, a1 = Math.atan2(-(X[1] - Y[1]), X[0] - Y[0]), a2 = Math.atan2(-(Z[1] - Y[1]), Z[0] - Y[0]);
+  let d = a2 - a1; while (d <= -Math.PI) d += 2 * Math.PI; while (d > Math.PI) d -= 2 * Math.PI;
+  g.strokeStyle = renk; g.lineWidth = 1.5; g.beginPath(); g.arc(gr.X(Y[0]), gr.Y(Y[1]), r, a1, a1 + d, d < 0); g.stroke();
+  if (yazi) { const o = a1 + d / 2, ek = Math.max(0, 40 - Math.abs(d) * 180 / Math.PI) * 0.9; g.fillStyle = renk; g.font = "600 12px system-ui,Arial"; g.textAlign = "center"; g.textBaseline = "middle";
+    g.fillText(yazi, gr.X(Y[0]) + Math.cos(o) * (r + 16 + ek), gr.Y(Y[1]) + Math.sin(o) * (r + 16 + ek)); }
+}
+const IZ = [];
+const RENK = ["#d6336c", "#2f9e44", "#e8590c", "#7048e8", "#1098ad", "#9c5b14"];
+const d2 = v => bicim(v, 2);
+
+function ciz() {
+  const uyari = document.getElementById("uyari");
+  if (MOD === "kenar" && !kenardanUcgen()) {
+    uyari.textContent = "Bu uzunluklarla üçgen oluşmaz (üçgen eşitsizliği sağlanmıyor). Sürgüleri değiştirin.";
+    gr.ciz = () => {}; gr.yenile(); document.getElementById("olcum").innerHTML = ""; return;
+  }
+  uyari.textContent = "";
+  const N = noktalar(), gorunen = new Set([...(AYAR.temel || ["A", "B", "C"]), ...(AYAR.ana || [])]);
+  gr.ciz = g => {
+    const ana = AYAR.ana_cokgen || ["A", "B", "C"];
+    (AYAR.paralel || []).forEach(([p, q, r]) => { // r'den geçen pq'ye paralel doğru ve pq doğrusu
+      const d = fark(N[q], N[p]); cizgi(g, ...uzat(N[p], N[q], -60, 60), "#adb5bd", false, 1.2); cizgi(g, ...uzat(N[r], topla(N[r], d), -60, 60), "#adb5bd", false, 1.2); });
+    if (ana.length) {
+      g.fillStyle = "rgba(28,126,214,.10)"; g.beginPath(); ana.forEach((k, i) => g[i ? "lineTo" : "moveTo"](gr.X(N[k][0]), gr.Y(N[k][1]))); g.closePath(); g.fill();
+      ana.forEach((k, i) => cizgi(g, N[k], N[ana[(i + 1) % ana.length]], "#1c7ed6", false, 2.2));
+    }
+    (AYAR.katmanlar || []).forEach((k, i) => {
+      if (!sec["k" + i]) return;
+      const renk = k.renk || RENK[i % RENK.length];
+      (k.dolgular || []).forEach(ks => { if (!ks.every(x => N[x])) return; g.fillStyle = renk + "33"; g.beginPath(); ks.forEach((x, j) => g[j ? "lineTo" : "moveTo"](gr.X(N[x][0]), gr.Y(N[x][1]))); g.closePath(); g.fill();
+        ks.forEach((x, j) => cizgi(g, N[x], N[ks[(j + 1) % ks.length]], renk, false, 1.6)); });
+      (k.cizgiler || []).forEach(([p, q]) => N[p] && N[q] && cizgi(g, N[p], N[q], renk, false, 1.8));
+      (k.kesikler || []).forEach(([p, q]) => N[p] && N[q] && cizgi(g, N[p], N[q], renk, true, 1.4));
+      (k.dogrular || []).forEach(([p, q]) => N[p] && N[q] && mesafe(N[p], N[q]) > 1e-9 && cizgi(g, ...uzat(N[p], N[q], -60, 60), renk, true, 1.2));
+      (k.isinlar || []).forEach(([p, q]) => N[p] && N[q] && mesafe(N[p], N[q]) > 1e-9 && cizgi(g, ...uzat(N[p], N[q], 0, 60), renk, false, 1.4));
+      (k.cemberler || []).forEach(([o, p]) => { if (!N[o] || !N[p]) return; g.strokeStyle = renk; g.lineWidth = 1.6; g.beginPath();
+        g.arc(gr.X(N[o][0]), gr.Y(N[o][1]), mesafe(N[o], N[p]) * (gr.X(1) - gr.X(0)), 0, 7); g.stroke(); });
+      (k.acilar || []).forEach(t => { if ([...t].every(x => N[x])) yay(g, N[t[1]], N[t[0]], N[t[2]], renk, d2(aci(N[t[0]], N[t[1]], N[t[2]])) + "°"); });
+      (k.noktalar || []).forEach(x => gorunen.add(x));
+      if (k.iz && N[k.iz]) { // İzi Göster (9. sınıf Tema 4, 4. Uygulama)
+        const son = IZ.at(-1); if (!son || mesafe(son, N[k.iz]) > 1e-6) IZ.push(N[k.iz]);
+        g.fillStyle = renk; IZ.forEach(p => { g.beginPath(); g.arc(gr.X(p[0]), gr.Y(p[1]), 2.2, 0, 7); g.fill(); });
+      }
+    });
+    if (sec.aci) { const u = ["A", "B", "C"]; u.forEach((k, i) => yay(g, N[k], N[u[(i + 2) % 3]], N[u[(i + 1) % 3]], "#495057", d2(aci(N[u[(i + 2) % 3]], N[k], N[u[(i + 1) % 3]])) + "°")); }
+    if (sec.kenar) [["A", "B"], ["B", "C"], ["C", "A"]].forEach(([p, q]) => {
+      const m = orta(N[p], N[q]), n = bir([-(N[q][1] - N[p][1]), N[q][0] - N[p][0]]), gm = icMerkez(N.A, N.B, N.C), s = (fark(m, gm)[0] * n[0] + fark(m, gm)[1] * n[1]) > 0 ? 1 : -1;
+      g.fillStyle = "#1c7ed6"; g.font = "600 12px system-ui"; g.textAlign = "center"; g.textBaseline = "middle";
+      g.fillText(d2(mesafe(N[p], N[q])), gr.X(m[0] + s * n[0] * 0.45), gr.Y(m[1] + s * n[1] * 0.45));
+    });
+    for (const k of gorunen) { const p = N[k]; if (!p) continue;
+      const sur = SURUK.includes(k) && MOD !== "kenar";
+      g.fillStyle = sur ? "#1c7ed6" : "#d6336c"; g.beginPath(); g.arc(gr.X(p[0]), gr.Y(p[1]), sur ? 7 : 4.5, 0, 7); g.fill();
+      if (sur) { g.strokeStyle = "#fff"; g.lineWidth = 2; g.stroke(); }
+      g.fillStyle = "#1f2328"; g.font = "bold 15px 'Times New Roman',serif"; g.textAlign = "left"; g.textBaseline = "bottom";
+      g.fillText(AYAR.koordinat ? `${k}(${bicim(p[0], 2)}, ${bicim(p[1], 2)})` : k, gr.X(p[0]) + 8, gr.Y(p[1]) - 5);
+    }
+  };
+  gr.yenile();
+  const olc = [];
+  (AYAR.katmanlar || []).forEach((k, i) => { if (sec["k" + i]) (k.olcumler || []).forEach(t => olc.push(t)); });
+  (AYAR.olcumler || []).forEach(t => olc.push(t));
+  document.getElementById("olcum").innerHTML = olc.map(t => {
+    const v = deger(t, N);
+    return `<dt>${t.replace(/\*/g, "·")}</dt><dd>${v === null ? "—" : d2(v)}</dd>`;
+  }).join("");
+}
+sigdir();
+
+/* ---------- sürükleme ---------- */
+let tutulan = null;
+gr.surukle = {
+  basla(x, y, px, py) {
+    if (MOD === "kenar") return false;
+    const N = noktalar();
+    tutulan = SURUK.find(k => N[k] && Math.hypot(gr.X(N[k][0]) - px, gr.Y(N[k][1]) - py) < 22) || null;
+    return !!tutulan;
+  },
+  tasi(x, y) {
+    if (!tutulan) return;
+    if (document.getElementById("yapistir").checked && ADIM) { x = Math.round(x / ADIM) * ADIM; y = Math.round(y / ADIM) * ADIM; }
+    const k = tutulan, eski = P[k];
+    if (YATAY.includes(k)) y = eski[1];
+    for (const [kayan, dayanak] of Object.entries(AYAR.ayni_yukseklik || {})) if (kayan === k) y = P[dayanak][1]; // paralel doğru üzerindeki noktalar
+    P[k] = [x, y];
+    for (const [kayan, dayanak] of Object.entries(AYAR.ayni_yukseklik || {})) if (dayanak === k) P[kayan] = [P[kayan][0], y];
+    const u = ["A", "B", "C"];
+    if (u.every(q => P[q]) && alan(u.map(q => P[q])) < 1e-6 && !(AYAR.izin_dejenere)) P[k] = eski; // üçgen bozulmasın
+    ciz();
+  }
+};
+ciz();
+</script>
+</body>
+</html>
