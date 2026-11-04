@@ -535,6 +535,7 @@ function noktalar() {
       case "cevrel_merkez": p = cevrel(...ucgenAl(N, a.ucgen)); break;
       case "diklik_merkezi": p = diklik(...ucgenAl(N, a.ucgen)); break;
       case "kesisim": p = kesis(g(a.d1[0]), fark(g(a.d1[1]), g(a.d1[0])), g(a.d2[0]), fark(g(a.d2[1]), g(a.d2[0]))); break;
+      case "bolen": { const k = S[a.surgu] ?? a.k ?? 1, p1 = g(a.uc[0]), p2 = g(a.uc[1]); p = topla(p1, kat(fark(p2, p1), k / (1 + k))); break; } // |P1 X| / |X P2| = k
       case "benzer": { // hedef = merkez + k·(kaynak − merkez) + kaydırma
         const k = S[a.surgu] ?? a.k ?? 1, m = g(a.merkez); p = topla(topla(m, kat(fark(g(a.kaynak), m), k)), a.kaydir || [0, 0]); break;
       }
@@ -577,6 +578,10 @@ function deger(ifade, N) {
   let hata = false;
   const js = ifade.replace(/\|([A-Z]\w?'?)([A-Z]\w?'?)\|/g, (_, p, q) => N[p] && N[q] ? `(${mesafe(N[p], N[q])})` : (hata = true, "0"))
     .replace(/m\(([A-Z])([A-Z])([A-Z])\)/g, (_, p, q, r) => N[p] && N[q] && N[r] ? `(${aci(N[p], N[q], N[r])})` : (hata = true, "0"))
+    .replace(/x\(([A-Z])\)/g, (_, p) => N[p] ? `(${N[p][0]})` : (hata = true, "0"))
+    .replace(/y\(([A-Z])\)/g, (_, p) => N[p] ? `(${N[p][1]})` : (hata = true, "0"))
+    .replace(/eğim\(([A-Z])([A-Z])\)/g, (_, p, q) => N[p] && N[q] && Math.abs(N[q][0] - N[p][0]) > 1e-9 ? `(${(N[q][1] - N[p][1]) / (N[q][0] - N[p][0])})` : (hata = true, "0"))
+    .replace(/eğimaçısı\(([A-Z])([A-Z])\)/g, (_, p, q) => { if (!N[p] || !N[q]) { hata = true; return "0"; } let a = Math.atan2(N[q][1] - N[p][1], N[q][0] - N[p][0]) * 180 / Math.PI; a = ((a % 180) + 180) % 180; return `(${a})`; })
     .replace(/A\(([A-Z]+)\)/g, (_, ks) => ks.split("").every(k => N[k]) ? `(${alan(ks.split("").map(k => N[k]))})` : (hata = true, "0"))
     .replace(/·/g, "*").replace(/−/g, "-");
   if (hata || /[^0-9.eE+\-*/() ]/.test(js)) return null;
@@ -606,7 +611,7 @@ function ciz() {
     gr.ciz = () => {}; gr.yenile(); document.getElementById("olcum").innerHTML = ""; return;
   }
   uyari.textContent = "";
-  const N = noktalar(), gorunen = new Set(["A", "B", "C", ...(AYAR.ana || [])]);
+  const N = noktalar(), gorunen = new Set([...(AYAR.temel || ["A", "B", "C"]), ...(AYAR.ana || [])]);
   gr.ciz = g => {
     const ana = AYAR.ana_cokgen || ["A", "B", "C"];
     (AYAR.paralel || []).forEach(([p, q, r]) => { // r'den geçen pq'ye paralel doğru ve pq doğrusu
@@ -640,7 +645,7 @@ function ciz() {
       g.fillStyle = sur ? "#1c7ed6" : "#d6336c"; g.beginPath(); g.arc(gr.X(p[0]), gr.Y(p[1]), sur ? 7 : 4.5, 0, 7); g.fill();
       if (sur) { g.strokeStyle = "#fff"; g.lineWidth = 2; g.stroke(); }
       g.fillStyle = "#1f2328"; g.font = "bold 15px 'Times New Roman',serif"; g.textAlign = "left"; g.textBaseline = "bottom";
-      g.fillText(k, gr.X(p[0]) + 8, gr.Y(p[1]) - 5);
+      g.fillText(AYAR.koordinat ? `${k}(${bicim(p[0], 2)}, ${bicim(p[1], 2)})` : k, gr.X(p[0]) + 8, gr.Y(p[1]) - 5);
     }
   };
   gr.yenile();
