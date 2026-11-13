@@ -1,0 +1,67 @@
+{
+ "slug": "trigonometri",
+ "repo_path": "ders-notlari/trigonometri",
+ "base_url": "https://kursatkeskin03.github.io/ders-notlari/trigonometri/",
+ "tests": [
+  {
+   "key": "pekistirme-1",
+   "count": 24
+  },
+  {
+   "key": "pekistirme-2",
+   "count": 24
+  },
+  {
+   "key": "pekistirme-3",
+   "count": 24
+  },
+  {
+   "key": "pekistirme-4",
+   "count": 24
+  },
+  {
+   "key": "pekistirme-5",
+   "count": 24
+  },
+  {
+   "key": "pekistirme-6",
+   "count": 24
+  },
+  {
+   "key": "pekistirme-7",
+   "count": 24
+  },
+  {
+   "key": "tarama-1",
+   "count": 20
+  },
+  {
+   "key": "tarama-2",
+   "count": 20
+  },
+  {
+   "key": "tarama-3",
+   "count": 20
+  },
+  {
+   "key": "tarama-4",
+   "count": 20
+  },
+  {
+   "key": "tarama-5",
+   "count": 20
+  },
+  {
+   "key": "tarama-6",
+   "count": 20
+  },
+  {
+   "key": "deneme-1",
+   "count": 30
+  },
+  {
+   "key": "deneme-2",
+   "count": 30
+  }
+ ]
+}
