@@ -36,6 +36,25 @@ h2 { margin:26px 0 4px; font-size:1.2rem; color:var(--acc); border-left:4px soli
 footer { margin-top:22px; color:var(--muted); font-size:.85rem; text-align:center; }
 </style>
 <div class="wrap">
+<style id="tablet-css">/* Tablet uyumu */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img{height:auto}
+button,a,summary,.chip,.qbtn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media (min-width:768px) and (max-width:1400px){
+header .in,nav,main,footer,.wrap{max-width:920px!important}
+main,nav,.wrap{padding-left:max(24px,env(safe-area-inset-left))!important;padding-right:max(24px,env(safe-area-inset-right))!important}
+body{font-size:max(1em,17px)}
+.qgrid{grid-template-columns:repeat(auto-fill,minmax(48px,1fr))!important}
+}
+@media (pointer:coarse){
+nav a,nav button,button,.chip,.qbtn{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+.qgrid .qbtn{display:flex}
+summary{min-height:44px}
+}
+@media (pointer:coarse) and (orientation:landscape) and (min-width:1000px){
+header .in,nav,main,footer,.wrap{max-width:1040px!important}
+}
+</style>
 <header><small>TRİGONOMETRİ · FÖY 1</small><h1>Dik Üçgen, Birim Çember, Radyan ve Esas Ölçü · Çözümler</h1><p>29 konu örneği ve 27 soruluk konu tekrar testinin adım adım çözümü. Önce kendin çöz, sonra buradan kontrol et.</p></header>
 <nav><span class="nl">Örnek</span><a href="#o1">1</a><a href="#o2">2</a><a href="#o3">3</a><a href="#o4">4</a><a href="#o5">5</a><a href="#o6">6</a><a href="#o7">7</a><a href="#o8">8</a><a href="#o9">9</a><a href="#o10">10</a><a href="#o11">11</a><a href="#o12">12</a><a href="#o13">13</a><a href="#o14">14</a><a href="#o15">15</a><a href="#o16">16</a><a href="#o17">17</a><a href="#o18">18</a><a href="#o19">19</a><a href="#o20">20</a><a href="#o21">21</a><a href="#o22">22</a><a href="#o23">23</a><a href="#o24">24</a><a href="#o25">25</a><a href="#o26">26</a><a href="#o27">27</a><a href="#o28">28</a><a href="#o29">29</a><span class="nl">Test</span><a href="#t1">1</a><a href="#t2">2</a><a href="#t3">3</a><a href="#t4">4</a><a href="#t5">5</a><a href="#t6">6</a><a href="#t7">7</a><a href="#t8">8</a><a href="#t9">9</a><a href="#t10">10</a><a href="#t11">11</a><a href="#t12">12</a><a href="#t13">13</a><a href="#t14">14</a><a href="#t15">15</a><a href="#t16">16</a><a href="#t17">17</a><a href="#t18">18</a><a href="#t19">19</a><a href="#t20">20</a><a href="#t21">21</a><a href="#t22">22</a><a href="#t23">23</a><a href="#t24">24</a><a href="#t25">25</a><a href="#t26">26</a><a href="#t27">27</a></nav>
 <h2 id="ornekler">Konu Örnekleri</h2>
