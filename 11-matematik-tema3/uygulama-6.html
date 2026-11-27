@@ -48,6 +48,25 @@ button.secili{background:var(--accent-soft);border-color:var(--accent);color:var
 .secenek input{width:18px;height:18px;accent-color:var(--accent)}
 footer{max-width:980px;margin:0 auto;padding:0 16px 24px;font-size:12px;color:var(--muted)}
 </style>
+<style id="tablet-css">/* Tablet uyumu */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img{height:auto}
+button,a,summary,.chip,.qbtn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media (min-width:768px) and (max-width:1400px){
+header .in,nav,main,footer,.wrap{max-width:980px!important}
+main,nav,.wrap{padding-left:max(24px,env(safe-area-inset-left))!important;padding-right:max(24px,env(safe-area-inset-right))!important}
+body{font-size:max(1em,17px)}
+.qgrid{grid-template-columns:repeat(auto-fill,minmax(48px,1fr))!important}
+}
+@media (pointer:coarse){
+nav a,nav button,button,.chip,.qbtn{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+.qgrid .qbtn{display:flex}
+summary{min-height:44px}
+}
+@media (pointer:coarse) and (orientation:landscape) and (min-width:1000px){
+header .in,nav,main,footer,.wrap{max-width:1040px!important}
+}
+</style>
 </head>
 <body>
 <header>

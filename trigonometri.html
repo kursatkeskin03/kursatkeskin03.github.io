@@ -33,6 +33,25 @@ ol.st li::marker { color:var(--muted); font-weight:600; }
 h2 + .sub { margin:-6px 0 12px; color:var(--muted); }
 .katex { white-space:nowrap; }
 </style>
+<style id="tablet-css">/* Tablet uyumu */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img{height:auto}
+button,a,summary,.chip,.qbtn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media (min-width:768px) and (max-width:1400px){
+header .in,nav,main,footer,.wrap{max-width:980px!important}
+main,nav,.wrap{padding-left:max(24px,env(safe-area-inset-left))!important;padding-right:max(24px,env(safe-area-inset-right))!important}
+body{font-size:max(1em,17px)}
+.qgrid{grid-template-columns:repeat(auto-fill,minmax(48px,1fr))!important}
+}
+@media (pointer:coarse){
+nav a,nav button,button,.chip,.qbtn{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+.qgrid .qbtn{display:flex}
+summary{min-height:44px}
+}
+@media (pointer:coarse) and (orientation:landscape) and (min-width:1000px){
+header .in,nav,main,footer,.wrap{max-width:1040px!important}
+}
+</style>
 </head><body><div class="wrap">
 <header><h1>Trigonometri · Çözümler</h1><p>YKS ders notu: Bölüm testleri ve Deneme Sınavı adım adım çözümleri</p></header>
 <nav><a href="#u1" data-k="u1">B1</a><a href="#u2" data-k="u2">B2</a><a href="#u3" data-k="u3">B3</a><a href="#u4" data-k="u4">B4</a><a href="#u5" data-k="u5">B5</a><a href="#u6" data-k="u6">B6</a><a href="#u7" data-k="u7">B7</a><a href="#u8" data-k="u8">B8</a><a href="#u9" data-k="u9">B9</a><a href="#u10" data-k="u10">B10</a><a href="#u11" data-k="u11">B11</a><a href="#deneme" data-k="deneme">Deneme</a></nav>

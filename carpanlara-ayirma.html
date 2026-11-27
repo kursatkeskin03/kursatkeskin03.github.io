@@ -32,7 +32,26 @@ li p { margin:0; }
 .katex .mathnormal,.katex .mathit,.katex .mord,.katex .mbin,.katex .mrel,.katex .mopen,.katex .mclose,.katex .mpunct,.katex .minner,.katex .mop,.katex .text,.katex .mathrm,.katex .textrm { font-family:Inter,system-ui,sans-serif; font-style:normal; }
 .katex .delimsizing.size1,.katex .delimsizing.size1 *{font-family:KaTeX_Size1}.katex .delimsizing.size2,.katex .delimsizing.size2 *{font-family:KaTeX_Size2}.katex .delimsizing.size3,.katex .delimsizing.size3 *{font-family:KaTeX_Size3}.katex .delimsizing.size4,.katex .delimsizing.size4 *{font-family:KaTeX_Size4}
 .katex .rlap,.katex .rlap *{font-family:KaTeX_Main!important}
-</style></head><body>
+</style><style id="tablet-css">/* Tablet uyumu */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img{height:auto}
+button,a,summary,.chip,.qbtn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media (min-width:768px) and (max-width:1400px){
+header .in,nav,main,footer,.wrap{max-width:980px!important}
+main,nav,.wrap{padding-left:max(24px,env(safe-area-inset-left))!important;padding-right:max(24px,env(safe-area-inset-right))!important}
+body{font-size:max(1em,17px)}
+.qgrid{grid-template-columns:repeat(auto-fill,minmax(48px,1fr))!important}
+}
+@media (pointer:coarse){
+nav a,nav button,button,.chip,.qbtn{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+.qgrid .qbtn{display:flex}
+summary{min-height:44px}
+}
+@media (pointer:coarse) and (orientation:landscape) and (min-width:1000px){
+header .in,nav,main,footer,.wrap{max-width:1040px!important}
+}
+</style>
+</head><body>
 <div class="wrap">
 <header><h1>Çarpanlara Ayırma · Çözümler</h1><p>YKS ders notu: pekiştirme sorularının, 8 testin ve 30 soruluk deneme sınavının adım adım çözümleri</p></header>
 <nav><a href="#pek" data-k="pek">Pekiştirme</a><a href="#u1" data-k="u1">Test 1</a><a href="#u2" data-k="u2">Test 2</a><a href="#u3" data-k="u3">Test 3</a><a href="#u4" data-k="u4">Test 4</a><a href="#u5" data-k="u5">Test 5</a><a href="#u6" data-k="u6">Test 6</a><a href="#u7" data-k="u7">Test 7</a><a href="#u8" data-k="u8">Test 8</a><a href="#deneme" data-k="deneme">Deneme</a></nav>

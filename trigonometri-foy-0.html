@@ -31,6 +31,25 @@ ol.st li::marker { color:var(--gold); font-weight:800; }
 .katex .mathnormal,.katex .mathit,.katex .mathrm,.katex .textrm,.katex .mainrm { font-family:Inter,KaTeX_Main,sans-serif; font-style:normal; }
 footer { margin-top:22px; color:var(--muted); font-size:.85rem; text-align:center; }
 </style>
+<style id="tablet-css">/* Tablet uyumu */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img{height:auto}
+button,a,summary,.chip,.qbtn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media (min-width:768px) and (max-width:1400px){
+header .in,nav,main,footer,.wrap{max-width:980px!important}
+main,nav,.wrap{padding-left:max(24px,env(safe-area-inset-left))!important;padding-right:max(24px,env(safe-area-inset-right))!important}
+body{font-size:max(1em,17px)}
+.qgrid{grid-template-columns:repeat(auto-fill,minmax(48px,1fr))!important}
+}
+@media (pointer:coarse){
+nav a,nav button,button,.chip,.qbtn{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+.qgrid .qbtn{display:flex}
+summary{min-height:44px}
+}
+@media (pointer:coarse) and (orientation:landscape) and (min-width:1000px){
+header .in,nav,main,footer,.wrap{max-width:1040px!important}
+}
+</style>
 </head><body><div class="wrap">
 <header><small>TRİGONOMETRİ · FÖY 0</small><h1>Ön Değerlendirme · Çözümler</h1><p>23 sorunun adım adım çözümü. Önce kendin çöz, sonra buradan kontrol et.</p></header>
 <nav><a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a><a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a><a href="#s7">7</a><a href="#s8">8</a><a href="#s9">9</a><a href="#s10">10</a><a href="#s11">11</a><a href="#s12">12</a><a href="#s13">13</a><a href="#s14">14</a><a href="#s15">15</a><a href="#s16">16</a><a href="#s17">17</a><a href="#s18">18</a><a href="#s19">19</a><a href="#s20">20</a><a href="#s21">21</a><a href="#s22">22</a><a href="#s23">23</a></nav>
